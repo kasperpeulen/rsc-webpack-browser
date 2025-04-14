@@ -18,11 +18,7 @@ module.exports = [
     },
     resolve: {
       extensions: ["...", ".ts", ".tsx"],
-      alias: {
-        "react-server-dom-webpack/server":
-          "react-server-dom-webpack/server.browser",
-      },
-      conditionNames: ["react-server"],
+      conditionNames: ["react-server", "browser"],
     },
     devtool:
       process.env.NODE_ENV === "production" ? "source-map" : "eval-source-map", // Add good source maps

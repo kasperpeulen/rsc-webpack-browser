@@ -9,6 +9,7 @@ module.exports = [
       rules: [{ test: /\.tsx?$/, use: { loader: "swc-loader" } }],
     },
     resolve: {
+      conditionNames: ["browser"],
       extensions: ["...", ".ts", ".tsx"],
     },
     plugins: [new ReactServerWebpackPlugin({ isServer: false })],
