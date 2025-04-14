@@ -6,7 +6,7 @@ This investigation explores how to render React Server Components (RSC) in Story
 
 Currently, our setup renders async **server** components as async **client** components, and handles server actions as if they were client actions. This approach worked for a while (albeit with some caveats), but broke in React 19 when the `enableSiblingPrerendering` feature flag was turned on.
 
-We could revert that feature flag in Storybook, but there have been longer-standing issues with RSC—particularly when libraries, including React itself, conditionally load different modules on the server vs. the client using the `react-server` condition:
+We could try to revert that feature flag in Storybook, but there have been longer-standing issues with RSC—particularly when libraries, including React itself, conditionally load different modules on the server vs. the client using the `react-server` condition:
 [See storybookjs/storybook#27527](https://github.com/storybookjs/storybook/issues/27527)
 
 ### Goal of This Investigation
