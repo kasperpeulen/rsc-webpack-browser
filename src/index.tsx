@@ -2,13 +2,11 @@
 import { renderToReadableStream } from "react-server-dom-webpack/server";
 import { Story } from "./components/users.stories";
 import type { JSX, Usable } from "react";
+import manifest from "../dist/client/react-client-manifest.json";
 
 const { use, createRoot, createFromReadableStream } = await import(
   // @ts-ignore
   /* webpackIgnore: true */ "/client/main.js"
-);
-const manifest = await fetch("/client/react-client-manifest.json").then((it) =>
-  it.json(),
 );
 
 function Use({ value }: { value: Usable<JSX.Element> }) {
