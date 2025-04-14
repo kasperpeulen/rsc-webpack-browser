@@ -34,7 +34,7 @@ function renderStory() {
           );
           if (module) {
             const action = __webpack_require__(module)[name!];
-            setTimeout(renderStory, 0);
+            // setTimeout(renderStory, 0);
             return action?.(...args);
           }
         },
