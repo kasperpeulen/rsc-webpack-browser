@@ -1,3 +1,4 @@
+import { saveToDb } from "./actions";
 import { Like } from "./like";
 
 export async function Users() {
@@ -11,7 +12,7 @@ export async function Users() {
         {users.map((user) => (
           <ul key={user.id}>
             {user.name}
-            <Like />
+            <Like onLike={saveToDb.bind(null, user.id)} />
           </ul>
         ))}
       </ul>
