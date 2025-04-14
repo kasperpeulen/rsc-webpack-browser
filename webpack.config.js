@@ -19,5 +19,7 @@ module.exports = [
       library: { type: "module" },
     },
     experiments: { outputModule: true },
+    devtool:
+      process.env.NODE_ENV === "production" ? "source-map" : "eval-source-map", // Add good source maps
   },
 ];
