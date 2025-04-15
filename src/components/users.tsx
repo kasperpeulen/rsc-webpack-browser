@@ -2,7 +2,6 @@ import { saveToDb } from "./actions";
 import { Like } from "./like";
 
 export async function Users() {
-  await new Promise((resolve) => setTimeout(resolve, 750));
   const users: { id: string; name: string }[] = await fetch(
     "https://jsonplaceholder.typicode.com/users",
   ).then((response) => response.json());

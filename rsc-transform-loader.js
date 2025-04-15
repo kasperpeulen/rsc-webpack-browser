@@ -1,6 +1,6 @@
-const { transformSource } = require("react-server-dom-webpack/node-loader");
+import { transformSource } from "react-server-dom-webpack/node-loader";
 
-module.exports = async function rscTransformLoader(code, map) {
+export default async function rscTransformLoader(code, map) {
   const callback = this.async();
   try {
     const { source } = await transformSource(
@@ -14,4 +14,4 @@ module.exports = async function rscTransformLoader(code, map) {
   } catch (err) {
     callback(err);
   }
-};
+}

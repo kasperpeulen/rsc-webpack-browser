@@ -1,12 +1,16 @@
 // @ts-ignore
-import { renderToReadableStream } from "react-server-dom-webpack/server";
-import { Story } from "./components/users.stories";
+import { renderToReadableStream } from "react-server-dom-webpack/server.browser";
+import { Story } from "../components/users.stories";
 import { type JSX, type Usable } from "react";
-import manifest from "../dist/client/react-client-manifest.json";
 
-const { use, createRoot, createFromReadableStream } = await import(
-  // @ts-ignore
-  /* webpackIgnore: true */ "/client/main.js"
+import {
+  use,
+  createRoot,
+  createFromReadableStream,
+} from "../react-client-entrypoint";
+
+const manifest = await fetch("/react-client-manifest.json").then((it) =>
+  it.json(),
 );
 
 function Use({ value }: { value: Usable<JSX.Element> }) {
