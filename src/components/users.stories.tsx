@@ -1,7 +1,7 @@
 import { type ReactNode, Suspense } from "react";
 import { Users } from "./users";
 
-export async function Story() {
+export function Story() {
   return (
     <div>
       <Text>All users</Text>
