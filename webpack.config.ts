@@ -16,10 +16,23 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "index.html" }),
-    new ReactServerWebpackPlugin({ isServer: false }),
+    new ReactServerWebpackPlugin({
+      isServer: false,
+      clientReferences: [
+        {
+          directory: ".",
+          recursive: true,
+          include: /\.(m?(js|ts)x?)$/,
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
+      {
+        test: /\.json$/,
+        loader: "json-loader",
+      },
       { test: /\.tsx?$/, use: { loader: "swc-loader" } },
       {
         layer: "client",
@@ -28,7 +41,7 @@ export default {
       {
         issuerLayer: "client",
         resolve: {
-          conditionNames: ["browser"],
+          conditionNames: ["...", "browser"],
         },
       },
       {
@@ -39,7 +52,7 @@ export default {
         issuerLayer: "rsc",
         loader: "./rsc-transform-loader.js",
         resolve: {
-          conditionNames: ["react-server", "browser"],
+          conditionNames: ["...", "react-server", "browser"],
         },
       },
     ],

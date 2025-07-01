@@ -1,19 +1,38 @@
-import { transformSource } from "react-server-dom-webpack/node-loader";
+import {
+  getSource,
+  transformSource,
+} from "react-server-dom-webpack/node-loader";
+import { join } from "path";
+import { readFile } from "fs/promises";
 
 export default async function rscTransformLoader(code, map) {
   const callback = this.async();
   try {
-    const url = "file://" + this.resourcePath;
+    const resourceUrl = "file://" + this.resourcePath;
 
-    const { source } = await transformSource(
-      code,
-      { format: "module", url },
-      async (source) => ({
-        source,
-      }),
+    const { source } = await getSource(
+      resourceUrl,
+      { format: "module" },
+      async (url, context) => {
+        if (resourceUrl === url) {
+          return { source: code };
+        }
+        if (url.endsWith(".map")) {
+          return { source: await readFile(join(this.context, url)) };
+        }
+        throw new Error(`Cannot load ${url}`);
+      },
     );
-    callback(null, source, map);
+
+    const transformed = await transformSource(
+      source,
+      { format: "module", url: resourceUrl },
+      async (source) => ({ source }),
+    );
+    callback(null, transformed.source, map);
   } catch (err) {
-    callback(err);
+    if (err instanceof Error) {
+      callback(err);
+    }
   }
 }

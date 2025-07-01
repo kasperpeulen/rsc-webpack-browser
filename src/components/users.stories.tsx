@@ -1,16 +1,14 @@
 import { type ReactNode, Suspense } from "react";
 import { Users } from "./users";
 
-import AppRouter from "next/dist/client/components/app-router";
-
 export async function Story() {
   return (
-    <AppRouter {...({} as any)}>
+    <div>
       <Text>All users</Text>
       <Suspense fallback={"Rendering async server components on the client..."}>
         <Users />
       </Suspense>
-    </AppRouter>
+    </div>
   );
 }
 

@@ -7,6 +7,7 @@
     "dev": "webpack serve"
   },
   "devDependencies": {
+    "@radix-ui/react-avatar": "^1.1.10",
     "@swc/core": "^1.11.21",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.1",
@@ -25,8 +26,8 @@
   },
   "dependencies": {
     "next": "^15.3.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-server-dom-webpack": "^19.1.0"
+    "react": "next",
+    "react-dom": "next",
+    "react-server-dom-webpack": "next"
   }
 }
