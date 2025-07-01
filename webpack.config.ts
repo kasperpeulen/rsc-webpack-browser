@@ -8,10 +8,7 @@ import "webpack-dev-server";
 
 export default {
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
-  entry: [
-    "./src/react-client-entrypoint.ts",
-    "./src/react-server-entrypoint.tsx",
-  ],
+  entry: ["./src/react-server-entrypoint.tsx"],
   output: {
     path: path.resolve(import.meta.dirname, "dist"),
     filename: "[name].js",
@@ -47,7 +44,12 @@ export default {
       },
     ],
   },
+
   resolve: {
+    alias: {
+      "@vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts":
+        "next/dist/client/dev/noop-turbopack-hmr",
+    },
     extensions: ["...", ".ts", ".tsx"],
   },
   experiments: { layers: true },
